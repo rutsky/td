@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary")
+
+cc_binary(
+  name = "td_example",
+  srcs = ["example/cpp/td_example.cpp"],
+  copts = ["--std=c++14"],
+  deps = ["@tdlib//:TdStatic"],
+)
+
+cc_binary(
+  name = "tdjson_example",
+  srcs = ["example/cpp/tdjson_example.cpp"],
+  deps = ["@tdlib//:TdJsonStatic"],
+)
+
+go_binary(
+  name = "td_go_example",
+  srcs = ["example/go/main.go"],
+  cgo = True,
+  cdeps = [
+    "@tdlib//:TdJson",
+  ],
+)
